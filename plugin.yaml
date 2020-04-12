@@ -1,0 +1,6 @@
+plugin:
+    name: 'baoweb.ronwatchdog::lang.plugin.name'
+    description: 'baoweb.ronwatchdog::lang.plugin.description'
+    author: Baoweb
+    icon: oc-icon-binoculars
+    homepage: ''
