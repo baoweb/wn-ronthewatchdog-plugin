@@ -18,18 +18,23 @@ Route::get('ron-the-watchdog', function(Request $request) {
 
     if($useComposerForCoreVersion) {
         $buildNumber = (new ComposerVersionReader())->getVersionNumber();
+        $platform =  (new ComposerVersionReader())->getPlatform();
     } else {
         $buildNumber = (new DatabaseVersionReader())->getVersionNumber();
+        $platform = (new DatabaseVersionReader())->getPlatform();
     }
-
 
     $fileChecker = new FileUpdateChecker();
 
     $indexHash = $fileChecker->getIndexHash();
 
     $htaccessHash = $fileChecker->getHtaccessHash();
+
+
+
     return [
-        'version' => (int) $buildNumber,
+        'platform' => $platform,
+        'version' => $buildNumber,
         'hashes' => [
             'index' => $indexHash,
             'htaccess' => $htaccessHash,

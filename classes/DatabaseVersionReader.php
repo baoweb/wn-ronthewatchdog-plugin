@@ -20,4 +20,10 @@ class DatabaseVersionReader implements VersionReaderInterface
 
         return (int) $buildNumber;
     }
+
+    public function getPlatform()
+    {
+        // TODO: implement this method
+        return false;
+    }
 }
