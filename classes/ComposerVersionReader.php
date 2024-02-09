@@ -19,6 +19,10 @@ class ComposerVersionReader implements VersionReaderInterface
 
         $octoberRainPackage = $installerPackages->where('name', 'october/rain')->first();
 
+        if(!$octoberRainPackage) {
+            return false;
+        }
+
         $semanticVersions = explode('.', $octoberRainPackage['version_normalized']);
 
         return (int) $semanticVersions[2];
