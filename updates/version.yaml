@@ -1,5 +1,5 @@
 1.0.1:
     - Initialize plugin.
 1.2.0:
-    - Plugin rewrite - multiple changes.
+    - Plugin rewrite - multiple changes (most importantly including plugins into the output).
 
