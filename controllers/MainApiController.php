@@ -36,7 +36,7 @@ class MainApiController
         }
 
         if (config('baoweb.ronwatchdog::send_plugin_info', true)) {
-            $this->getPlginInfo();
+            $this->getPluginInfo();
         }
 
         $versionFile = (new \Winter\Storm\Parse\Yaml())->parseFile(__DIR__ . '/../updates/version.yaml');
@@ -67,7 +67,7 @@ class MainApiController
         $this->output['algorithm'] = $fileChecker->getAlgorithm();
     }
 
-    protected function getPlginInfo(): void
+    protected function getPluginInfo(): void
     {
         $pluginsReader = new PluginVersionReader();
 
