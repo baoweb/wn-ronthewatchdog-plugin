@@ -1,2 +1,6 @@
 1.0.1:
     - Initialize plugin.
+2.0.0:
+    - Plugin rewrite for Winter CMS.
+2.1.0:
+    - Include cms name and Ron the watchdog version in output.

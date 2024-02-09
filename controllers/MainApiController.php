@@ -4,6 +4,7 @@ use Baoweb\RonWatchdog\Classes\PluginVersionReader;
 use Illuminate\Http\Request;
 use Baoweb\RonWatchdog\Classes\FileUpdateChecker;
 use Baoweb\RonWatchdog\Classes\UpdateManagerVersionReader;
+use October\Rain\Parse\Yaml;
 use Winter\Storm\Support\Facades\Config;
 
 /**
@@ -26,9 +27,9 @@ class MainApiController
         // getting the version
         $build = (new UpdateManagerVersionReader())->getVersionNumber();
 
+        $this->output['cms'] = 'winter-cms';
         $this->output['version'] = $build['build'];
         $this->output['modified'] = $build['modified'];
-
 
         if (config('baoweb.ronwatchdog::send_file_hashes', true)) {
             $this->getHashes();
@@ -37,6 +38,16 @@ class MainApiController
         if (config('baoweb.ronwatchdog::send_plugin_info', true)) {
             $this->getPlginInfo();
         }
+
+        $versionFile = (new \Winter\Storm\Parse\Yaml())->parseFile(__DIR__ . '/../updates/version.yaml');
+        end($versionFile);
+
+        $this->output['meta'] = [
+            'generated_by' => [
+                'plugin' => 'ron-the-watchdog',
+                'version' => key($versionFile)
+            ]
+        ];
 
         return $this->output;
     }
