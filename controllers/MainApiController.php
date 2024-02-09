@@ -6,8 +6,9 @@ use Baoweb\RonWatchdog\Classes\PluginVersionReader;
 use Illuminate\Http\Request;
 use Baoweb\RonWatchdog\Classes\FileUpdateChecker;
 use Baoweb\RonWatchdog\Classes\UpdateManagerVersionReader;
+use Illuminate\Support\Facades\View;
 use October\Rain\Parse\Yaml;
-use Winter\Storm\Support\Facades\Config;
+use October\Rain\Support\Facades\Config;
 
 /**
  * Main Api Controller Backend Controller
@@ -46,7 +47,7 @@ class MainApiController
             $this->getPluginInfo();
         }
 
-        $versionFile = (new \Winter\Storm\Parse\Yaml())->parseFile(__DIR__ . '/../updates/version.yaml');
+        $versionFile = (new Yaml())->parseFile(__DIR__ . '/../updates/version.yaml');
         end($versionFile);
 
         $this->output['meta'] = [

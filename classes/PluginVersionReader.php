@@ -15,7 +15,7 @@ class PluginVersionReader
     {
         $pluginManager = PluginManager::instance();
 
-        $installedPlugins = $pluginManager->getAllPlugins();
+        $installedPlugins = $pluginManager->getPlugins();
 
         $plugins = [];
 
