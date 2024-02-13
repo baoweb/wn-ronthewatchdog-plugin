@@ -1,0 +1,21 @@
+{
+    "name": "winter/wn-ronwatchdog-plugin",
+    "type": "winter-plugin",
+    "description": "Translate plugin for Winter CMS",
+    "homepage": "https://github.com/baoweb/wn-ronthewatchdog-plugin/",
+    "keywords": ["winter", "wintercms", "maintenance"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Kryl",
+            "email": "martin@baoweb.cz",
+            "role": "Original Author"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "extra": {
+        "installer-name": "ronwatchdog"
+    }
+}
