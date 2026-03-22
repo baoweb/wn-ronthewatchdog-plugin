@@ -1,5 +1,6 @@
 <?php namespace Baoweb\RonWatchdog\Controllers;
 
+use Baoweb\RonWatchdog\Classes\ComposerPackageReader;
 use Baoweb\RonWatchdog\Classes\PluginVersionReader;
 use Illuminate\Http\Request;
 use Baoweb\RonWatchdog\Classes\FileUpdateChecker;
@@ -39,6 +40,10 @@ class MainApiController
             $this->getPluginInfo();
         }
 
+        if (config('baoweb.ronwatchdog::send_package_info', true)) {
+            $this->getPackageInfo();
+        }
+
         $versionFile = (new \Winter\Storm\Parse\Yaml())->parseFile(__DIR__ . '/../updates/version.yaml');
         end($versionFile);
 
@@ -74,5 +79,12 @@ class MainApiController
         $plugins = $pluginsReader->getPluginList();
 
         $this->output['plugins'] = $plugins;
+    }
+
+    protected function getPackageInfo(): void
+    {
+        $packageReader = new ComposerPackageReader();
+
+        $this->output['packages'] = $packageReader->getPackageList();
     }
 }

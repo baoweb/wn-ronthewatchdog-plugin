@@ -21,7 +21,7 @@ class PluginVersionReader
 
         $pluginVersions = PluginVersion::all();
 
-        $composerRequires = $this->getComposerRequireKeys();
+        $composerRequires = (new ComposerPackageReader())->getRequireKeys();
 
         foreach ($installedPlugins as $key => $plugin) {
             list($namespace, $pluginName) = explode('.', $key);
@@ -40,18 +40,6 @@ class PluginVersionReader
         }
 
         return $plugins;
-    }
-
-    protected function getComposerRequireKeys(): array
-    {
-        $composerFile = base_path('composer.json');
-        if (!file_exists($composerFile)) {
-            return [];
-        }
-
-        $composer = json_decode(file_get_contents($composerFile), true);
-
-        return array_keys($composer['require'] ?? []);
     }
 
     protected function isComposerInstalled(string $namespace, string $pluginName, array $composerRequires): bool

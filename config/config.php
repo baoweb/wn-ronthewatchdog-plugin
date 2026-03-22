@@ -24,7 +24,12 @@ return [
     'send_file_hashes' => true,
 
     /**
-     * Include plugin information including plugin version in the output
+     * Include plugin information including a plugin version in the output
      */
     'send_plugin_info' => true,
+
+    /**
+     * Include package information including a package version in the output
+     */
+    'send_package_info' => true,
 ];
