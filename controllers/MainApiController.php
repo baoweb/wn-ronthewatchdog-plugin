@@ -18,11 +18,8 @@ class MainApiController
 
     public function index(Request $request)
     {
-        $whitelistedIp = Config::get('baoweb.ronwatchdog::whitelisted_ip', false);
-
-        // check if the request is coming from the whitelisted IP
-        if($request->ip() != $whitelistedIp) {
-            return  \Illuminate\Support\Facades\Response::make(View::make('cms::404'), 404);
+        if ($denied = $this->checkIpWhitelist($request)) {
+            return $denied;
         }
 
         // getting the version
@@ -55,6 +52,34 @@ class MainApiController
         ];
 
         return $this->output;
+    }
+
+    public function audit(Request $request)
+    {
+        if ($denied = $this->checkIpWhitelist($request)) {
+            return $denied;
+        }
+
+        $lockFile = base_path('composer.lock');
+
+        if (!file_exists($lockFile)) {
+            return response()->json(['error' => 'composer.lock not found'], 404);
+        }
+
+        return response()->json(
+            json_decode(file_get_contents($lockFile), true)
+        );
+    }
+
+    protected function checkIpWhitelist(Request $request)
+    {
+        $whitelistedIp = Config::get('baoweb.ronwatchdog::whitelisted_ip', false);
+
+        if ($request->ip() != $whitelistedIp) {
+            return \Illuminate\Support\Facades\Response::make(View::make('cms::404'), 404);
+        }
+
+        return null;
     }
 
     protected function getHashes(): void
