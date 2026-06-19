@@ -5,7 +5,6 @@ use Baoweb\RonWatchdog\Classes\PluginVersionReader;
 use Illuminate\Http\Request;
 use Baoweb\RonWatchdog\Classes\FileUpdateChecker;
 use Baoweb\RonWatchdog\Classes\UpdateManagerVersionReader;
-use October\Rain\Parse\Yaml;
 use Winter\Storm\Support\Facades\Config;
 
 /**
@@ -76,7 +75,7 @@ class MainApiController
         $whitelistedIp = Config::get('baoweb.ronwatchdog::whitelisted_ip', false);
 
         if ($request->ip() != $whitelistedIp) {
-            return \Illuminate\Support\Facades\Response::make(View::make('cms::404'), 404);
+            return \Illuminate\Support\Facades\Response::make(\View::make('cms::404'), 404);
         }
 
         return null;

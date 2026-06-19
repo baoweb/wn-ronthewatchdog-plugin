@@ -4,7 +4,14 @@ This plugin is still work in progress. Please use with care.
 
 ## Instalation guide
 
-- Clone the repository into your plugin directory under baoweb/ronwatchdog
+- Install via Composer from the Baoweb private (Satis) repository:
+
+```bash
+composer require baoweb/wn-ronthewatchdog-plugin
+```
+
+  This installs the plugin into `plugins/baoweb/ronwatchdog`. (Make sure the Baoweb Satis
+  repository is registered under `repositories` in your project's `composer.json` first.)
 
 - Whitelist IP address you will be making your requests either in the .env file:
 
