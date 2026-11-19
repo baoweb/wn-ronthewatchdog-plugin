@@ -1,2 +1,4 @@
 2.0.0:
     - First Composer/Satis release for Winter CMS. File-hash, plugin and package audit endpoints with IP whitelisting and the /audit composer.lock endpoint.
+2.0.1:
+    - Widen composer/installers requirement to ^1.11 || ^2.0 so the plugin installs on projects still using installers v1.
